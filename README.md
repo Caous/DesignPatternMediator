@@ -43,7 +43,7 @@ Vamos imaginar o seguinte cenário, você tem uma oficina onde sua oficina tem o
 
 ### <h2> Criação de Classes
 
-Vamos criar a interface que contém os métodos necessários para chamada dos componentes
+Vamos criar a interface que contém os métodos necessários para chamada dos componentes.
 ```C#
    public interface IMediator
    {
@@ -51,7 +51,7 @@ Vamos criar a interface que contém os métodos necessários para chamada dos co
    }
 ```
 
-Próxima etapa é criarmos a classe context que terá o método de notify e conhece todas classes necessárias
+Próxima etapa é criarmos a classe context que terá o método de notify e conhece todas classes necessárias.
 ```C#
 
 ///Classe que implementa o IMediator
@@ -94,7 +94,7 @@ Próxima etapa é criarmos a classe context que terá o método de notify e conh
 ```
 </br>
 
-Agora vamos criar nossa classes de negócio
+Agora vamos criar nossa classes de negócio.
 ```C#
    public class EsteticaServico : OrdemServicoBase
    {
@@ -136,7 +136,7 @@ Agora vamos criar nossa classes de negócio
    }
 ```
 
-E por ultimo a implementação
+E por ultimo a implementação.
 
 ```C#
 using MediatorDesignPattern.Mediator;
