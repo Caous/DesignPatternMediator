@@ -2,7 +2,7 @@
 
 Projeto com finalidade em mostrar o padrão de projeto Mediator com implementação
 
-![Strategy](https://user-images.githubusercontent.com/38294660/209868622-2621a08e-5b3c-4d71-ace5-3d675066dd5d.png)
+![Mediator](https://refactoring.guru/images/patterns/content/mediator/mediator.png?id=0264bd857a231b6ea2d0c537c092e698)
 
 
 ### <h2>Fala Dev, seja muito bem-vindo
@@ -13,143 +13,144 @@ Projeto com finalidade em mostrar o padrão de projeto Mediator com implementaç
   
 
 
-<img align="right" src="https://refactoring.guru/images/patterns/diagrams/strategy/solution.png?id=0813a174b29a2ed5902d321aba28e5fc" width="300" height="300"/>
+<img align="right" src="https://methodpoet.com/wp-content/uploads/2022/06/mediator-pattern-solution.png" width="300" height="300"/>
 
 
 </br></br>
 
-### <h2>Strategy <a href="https://refactoring.guru/pt-br/design-patterns/strategy" target="_blank"><img alt="Serilog" src="https://img.shields.io/badge/Strategy-blue?style=flat&logo=google-chrome"></a>
+### <h2>Mediator <a href="https://refactoring.guru/pt-br/design-patterns/mediator" target="_blank"><img alt="Mediator" src="https://img.shields.io/badge/Mediator-blue?style=flat&logo=google-chrome"></a>
 
- <a href="https://refactoring.guru/pt-br/design-patterns/strategy" target="_blank">Design Pattern Strategy ou Padrão de Projeto Estratégia </a> é um padrão de projeto para <b>resolver um problema que já foi encontrado por outras pessoas</b>, sendo assim por este problema ter se repetido diversas vezes, criaram-se um padrão de solução ou como costumamos dizer Padrão de Projeto / Design Pattern para resolver este problema.
+ <a href="https://refactoring.guru/pt-br/design-patterns/mediator" target="_blank">Design Pattern Mediator ou Padrão de Projeto Mediador </a> é um padrão de projeto para <b>resolver um problema que já foi encontrado por outras pessoas</b>, sendo assim por este problema ter se repetido diversas vezes, criaram-se um padrão de solução ou como costumamos dizer Padrão de Projeto / Design Pattern para resolver este problema.
  
 Esse padrão de projeto pode ser utilizado <b>INDIFERENTE DA LINGUAGEM DE PROMAÇÃO</b>, ou seja, pode ser aplicado em qualquer lugar. Mas fica um <b>Ponto de Atenção</b> para vocês, só implementem realmente se fizer sentido.
  
-Design Pattern Strategy tem como objetivo conectar/centralizar códigos que tem o mesmo objetivo, mas para se chegar no resultado efetuam lógicas, etapas de validações, conexões difentes. Sendo assim é uma forma de conseguir centralizar aquele código <b>LEGADO</b> que não pode ser apagado porque ainda é utilizado, e misturar com o código novo, onde ambos vão mostrar o mesmo resultado para você.
+Design Pattern Mediator tem como objetivo centralizar códigos que precisam de complemento de outros, ou seja, uma ação quando solicitada, precisar processar outro código/classe, ao invés de termos uma classe chamando a outra, temos um centralizador. Desta forma pense que o Mediator é uma forma de arbitro pronto para orquestra o jogo da forma que precisa, ele é responsável por cada ação que acontece, ou seja, se uma falta for cometida ele dá um cartão, advertência, se alguém for ser trocado durante o jogo, ele também irá orquestrar e chamar os responsáveis para tal ação acontecer com sucesso.
 
-Sendo assim Strategy utiliza 3 Pilares:
+Sendo assim Mediator utiliza 3 Pilares:
 
-<b>Interface</b> que irá conter os métodos padrões que ambos os códigos vão fazer e chegam ao mesmo resultado ou seja sua saída é a mesma
+<b>Mediator</b> A interface do Mediador declara métodos de comunicação com os componentes, os quais geralmente incluem apenas um método de notificação.
+   
+<b>Concrete</b> Os Mediadores Concretos encapsulam as relações entre vários componentes. Os mediadores concretos quase sempre mantém referências de todos os componentes os quais gerenciam e, algumas vezes, até gerenciam o ciclo de vida deles.
+   
+<b>Componentes</b> Os Componentes são várias classes que contém alguma lógica de negócio.
 
-<b>ConcreteStrategy</b> que irá conter as implementar da interface e os códigos necessários, ou seja, você terá uma classe que implementa a interface com o Código Legado e outra classe que implementa a interface com o Código Novo
-
-<b>Context</b> que por último será a classe principal que irá automáticamente implementar as classes necessárias de acordo com a estratégia selecionada por você desenvolvedor ou usuário (caso seja controlado por ele em alguma tela)
-
-<b>Dica: Você pode usar o padrão de projeto adaptativo/ designer pattern adapter para fazer uma implementação adaptada para sua regra de negócio, mas basicamente tente manter o Strategy o mais conservador possível
-
-Legal né? Mas agora a pergunta é como posso usar o Strategy? Abaixo dou um exemplo de caso de uso.
+Legal né? Mas agora a pergunta é como posso usar o Mediator? Abaixo dou um exemplo de caso de uso.
 
 </br></br>
 
 ### <h2>[Cenário de Uso]
-Vamos imaginar o seguinte cenário, você tem um <b>WebService</b> que <b>consulta os dados de alunos em uma escola</b>, mas este WebService está começando a fica <b>defasado e muito lento para consultas</b>, então você cria ou encontra uma API atualizada e totalmente otimizada que lhe devolve a maior parte destes dados que são utilizados hoje. Sendo assim vamos agora colocar que seu WebService venha fica fora do ar e lhe responda <b> Time Out<b/>, seria muito útil utilizar aquela API agora certo? Mas como centralizar e ter a menor <b>refatoração de código possível</b>? É esse o objetivo do Strategy
+Vamos imaginar o seguinte cenário, você tem uma oficina onde sua oficina tem o serviço de <b>ordem de serviço </b>, mas dentro da sua oficina você tem diversos serviços (catálogo) e cada serviço que chega, você tem uma regra de negócio para ele, validar por exemplo se está faltando peça, se precisa de reposição etc... Como você poderia centralizar a chamada de cada serviço sem que na sua tela do seu Web ele chame todas essas classes? Esse é o objetivo do Mediator, saber quem será chamado.
 
 ### <h2> Criação de Classes
 
-Vamos criar a interface que contém os métodos necessários para retornar os dados dos alunos, chamando o método de GetAllStudents
+Vamos criar a interface que contém os métodos necessários para chamada dos componentes
 ```C#
-   public interface IStudent
-    {
-        ICollection<Student> GetAllStudents();
-    }
+   public interface IMediator
+   {
+    void Notify(object sender, EServico servicos);
+   }
 ```
 
-Próxima etapa é criarmos as classes que vão implementar essa interface IStudent
+Próxima etapa é criarmos a classe context que terá o método de notify e conhece todas classes necessárias
 ```C#
 
-///Classe que busca direto da API
- public class StudentApi : IStudent
-    {
-        public StudentApi()
-        {
+///Classe que implementa o IMediator
+ public class ConcreteMediator : IMediator
+   {
+    private readonly EsteticaServico _estetica;
+    private readonly FreioServico _freio;
+    private readonly OleoServico _oleo;
 
-        }
-        public ICollection<Student> GetAllStudents()
-        {
-            ICollection<Student> students = new List<Student>() { new Student() { FirstName = "Lionel", LastName = "Messi", Active = true }, new Student() { FirstName = "Cristiano", LastName = "Ronaldo", Active = true }, new Student() { FirstName = "Kylian", LastName = "Mbappe", Active = false } };
-            return students;
-        }
+    public ConcreteMediator(EsteticaServico estetica, FreioServico freio, OleoServico oleo)
+    {
+        _estetica = estetica;
+        _estetica.SetMediator(this);
+        _freio = freio;
+        _freio.SetMediator(this);
+        _oleo = oleo;
+        _oleo.SetMediator(this);
     }
-    
-    ///Classe que busca direto do banco de dados    
-        public class StudentDb : IStudent
+    public void Notify(object sender, EServico servicos)
     {
-        public StudentDb()
-        {
 
-        }
-        public ICollection<Student> GetAllStudents()
+        switch (servicos)
         {
-            ICollection<Student> students = new List<Student>() { new Student() { FirstName = "Neymar", LastName = "Junior", Active = true }, new Student() { FirstName = "Luka", LastName = "Modric", Active = true } };
-            return students;
+            case EServico.Freios:
+                _freio.CriarOrdemServico();
+                break;
+            case EServico.Oleo:
+                _oleo.CriarOrdemServico();
+                break;
+            case EServico.Estetica:
+                _estetica.CriarOrdemServico();
+                break;
+            default:
+                break;
         }
-    }
-    
-    ///Classe que busca direto do WebService
-        public class StudentWebService : IStudent
-    {
-        public StudentWebService()
-        {
 
-        }
-        public ICollection<Student> GetAllStudents()
-        {
-            return null;
-        }
 
     }
+   }
 ```
 </br>
 
-Agora vamos criar nosso Context que irá chamar a interface e criar a estratégia a ser utilizada
+Agora vamos criar nossa classes de negócio
 ```C#
- public class ContextStudent
-    {
-        IStudent student;
-        public ContextStudent()
-        {
+   public class EsteticaServico : OrdemServicoBase
+   {
+      public EsteticaServico(string servico, IMediator mediator = null) : base(servico, mediator)
+      {
+      }
 
-        }
+      public void ServicoEfetuado()
+      {
+           Console.WriteLine($"Servico efetuado as {DateTime.Now} {base.CriarOrdemServico()}");
+           this._mediator.Notify(this, Enumeradores.EServico.Estetica);
+      }
 
-        public void SetStrategy(IStudent _student)
-        {
-            this.student = _student;
-        }
+   }
+   
+   public class FreioServico : OrdemServicoBase
+   {
+      public FreioServico(string servico, IMediator mediator = null) : base(servico, mediator)
+      {
+      }
 
-        public ICollection<Student> ExecuteStrategy()
-        {
-            return student.GetAllStudents();
-        }
-    }
+      public void ServicoEfetuado()
+      {
+        Console.WriteLine($"Servico efetuado as {DateTime.Now} {CriarOrdemServico()}");
+        this._mediator.Notify(this, EServico.Estetica);
+      }
+   }
+
+   public class OleoServico : OrdemServicoBase
+   {
+      public OleoServico(string servico, IMediator mediator = null) : base(servico, mediator)
+      {
+      }
+      public void ServicoEfetuado()
+      {
+        Console.WriteLine($"Servico efetuado as {DateTime.Now} {CriarOrdemServico()}");
+        this._mediator.Notify(this, EServico.Estetica);
+      }
+   }
 ```
 
-E por ultimo basta apenas chamar a classe context e implementar a estratégia de acordo com a regra de negócio
+E por ultimo a implementação
 
 ```C#
-Console.WriteLine("Welcome to implementation design patterns Strategy");
+using MediatorDesignPattern.Mediator;
+using MediatorDesignPattern.Servicos;
 
-ContextStudent contextStudent = new ContextStudent();
+EsteticaServico esteticaServico = new EsteticaServico("Vidrificação");
+FreioServico freioServico = new FreioServico("Troca pastilho de freio");
+OleoServico oleoServico = new OleoServico("Troca de oléo");
 
-ICollection<Student> students;
+new ConcreteMediator(esteticaServico, freioServico, oleoServico);
 
-StudentWebService studentWebService = new StudentWebService();
-
-contextStudent.SetStrategy(studentWebService);
-
-students = contextStudent.ExecuteStrategy();
-
-if (students != null)
-    foreach (var student in students)
-        Console.WriteLine(student.ToString());
-
-StudentApi studentApi = new StudentApi();
-
-contextStudent.SetStrategy(studentApi);
-
-students = contextStudent.ExecuteStrategy();
-
-if (students != null)
-    foreach (var student in students)
-        Console.WriteLine(student.ToString());
+esteticaServico.ServicoEfetuado();
+freioServico.ServicoEfetuado();
+oleoServico.ServicoEfetuado();
 ```
 
 
@@ -158,17 +159,6 @@ if (students != null)
 
 ### <h5> [Linguagem Programação Utilizada]</h5>
 ![C#](https://img.shields.io/badge/C%23-000000?style=for-the-badge&logo=c-sharp&logoColor=purple)
-
-
-
-### <h5> [Web 🌐 - Utilizado]</h5>
-![HTML5](https://img.shields.io/badge/-HTML5-000000?style=for-the-badge&logo=HTML5)
-![CSS3](https://img.shields.io/badge/-CSS3-000000?style=for-the-badge&logo=CSS3)
-![JavaScript](https://img.shields.io/badge/-JavaScript-000000?style=for-the-badge&logo=javascript)
-
-
-
-
 
 ### <h5> [Versionamento de projeto] </h5>
 ![Github](http://img.shields.io/badge/-Github-000000?style=for-the-badge&logo=Github&logoColor=green)
