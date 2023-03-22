@@ -39,7 +39,7 @@ Legal né? Mas agora a pergunta é como posso usar o Mediator? Abaixo dou um exe
 </br></br>
 
 ### <h2>[Cenário de Uso]
-Vamos imaginar o seguinte cenário, você tem uma oficina onde sua oficina tem o serviço de <b>ordem de serviço </b>, mas dentro da sua oficina você tem diversos serviços (catálogo) e cada serviço que chega, você tem uma regra de negócio para ele, validar por exemplo se está faltando peça, se precisa de reposição etc... Como você poderia centralizar a chamada de cada serviço sem que na sua tela do seu Web ele chame todas essas classes? Esse é o objetivo do Mediator, saber quem será chamado.
+Vamos imaginar o seguinte cenário, você tem uma oficina onde sua oficina tem o serviço de <b>ordem de serviço </b>, mas dentro da sua oficina você tem diversos serviços (catálogo) e cada serviço que chega, você tem uma regra de negócio para ele, validar por exemplo se está faltando peça, se precisa de reposição etc... Como você poderia centralizar a chamada de cada serviço sem que na sua tela (Windows Form/Asp.net Web) do seu projeto implemente todas as classes fazendo uma mistura e acessos diretos que talvez nem deveria ocorrer devido a arquitetura do projeto? Esse é o objetivo do Mediator, saber quem será chamado.
 
 ### <h2> Criação de Classes
 
