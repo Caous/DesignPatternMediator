@@ -22,7 +22,7 @@ Projeto com finalidade em mostrar o padrão de projeto Mediator com implementaç
 
  <a href="https://refactoring.guru/pt-br/design-patterns/mediator" target="_blank">Design Pattern Mediator ou Padrão de Projeto Mediador </a> é um padrão de projeto para <b>resolver um problema que já foi encontrado por outras pessoas</b>, sendo assim por este problema ter se repetido diversas vezes, criaram-se um padrão de solução ou como costumamos dizer Padrão de Projeto / Design Pattern para resolver este problema.
  
-Esse padrão de projeto pode ser utilizado <b>INDIFERENTE DA LINGUAGEM DE PROMAÇÃO</b>, ou seja, pode ser aplicado em qualquer lugar. Mas fica um <b>Ponto de Atenção</b> para vocês, só implementem realmente se fizer sentido.
+Esse padrão de projeto pode ser utilizado <b>INDIFERENTE DA LINGUAGEM DE PROGRAMAÇÃO</b>, ou seja, pode ser aplicado em qualquer lugar. Mas fica um <b>Ponto de Atenção</b> para vocês, só implementem realmente se fizer sentido.
  
 Design Pattern Mediator tem como objetivo centralizar códigos que precisam de complemento de outros, ou seja, uma ação quando solicitada, precisar processar outro código/classe, ao invés de termos uma classe chamando a outra, temos um centralizador. Desta forma pense que o Mediator é uma forma de arbitro pronto para orquestra o jogo da forma que precisa, ele é responsável por cada ação que acontece, ou seja, se uma falta for cometida ele dá um cartão, advertência, se alguém for ser trocado durante o jogo, ele também irá orquestrar e chamar os responsáveis para tal ação acontecer com sucesso.
 
